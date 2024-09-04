@@ -11,10 +11,15 @@ class Kritik extends Model
 
     protected $table = 'kritiks';
     protected $primaryKey = 'id';
-    protected $fillable = ['comment','rating','film_id','user_id', ];
+    protected $fillable = [
+        'comment',
+        'rating',
+        'film_id',
+        'user_id',
+    ];
 
     public function user()
     {
-        return $this->hasOne(User::class,'id','user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
