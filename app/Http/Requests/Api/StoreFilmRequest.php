@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
 class StoreFilmRequest extends FormRequest
 {
     /**
@@ -22,12 +23,15 @@ class StoreFilmRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'details' => 'required'
+            'title' => 'required',
+            'sinopsis' => 'required',
+            'year' => 'required',
+            'poster' => 'required|image|mimes:png,jpg,jpeg,gif',
+            'genre_id' => 'required|exists:genres,id'
+
         ];
     }
-
-    public function failedValidation(Validator $validator)
+    public function failedValidation(Validator $validator): void
     {
         throw new HttpResponseException(response()->json([
             'success'   => false,
@@ -36,3 +40,4 @@ class StoreFilmRequest extends FormRequest
         ]));
     }
 }
+
