@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Genre;
 use App\Models\Peran;
 use App\Models\Kritik;
-use App\Models\Cast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,7 +26,7 @@ class Film extends Model
 
     public function genre()
     {
-     return  $this->belongsTo(Genre::class. 'genre_id');
+     return  $this->belongsTo(Genre::class, 'genre_id');
     }
 
 }

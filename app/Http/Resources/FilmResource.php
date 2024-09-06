@@ -14,9 +14,9 @@ class FilmResource extends JsonResource
             'sinopsis' => $this->sinopsis,
             'poster' => $this->poster,
             'year' => $this->year,
-            'genre_id' => $this->genre_id,
-            'komentar'=> $this-> kritiks->pluck('comment'),
-            'actor'=> $this->perans->map(function($peran){
+            'genre_id' => $this->genre->name,
+            'komentar'=> $this-> kritik()->pluck('comment'),
+            'actor'=> $this->peran->map(function($peran){
                 return [
                     'actor'=>$peran->actor,
                     'cast' =>$peran->cast->name,

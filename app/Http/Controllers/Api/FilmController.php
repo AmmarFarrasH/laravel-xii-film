@@ -56,9 +56,6 @@ class FilmController extends Controller
     public function show(string $id)
     {
         $Film = $this->FilmRepositoryInterfaces->getById($id);
-
-        $Film['kritiks'] = $Film->kritik()->get();
-        $Film['perans'] = $Film->peran()->get();
         return ApiResponseClass::sendResponse(new FilmResource($Film),'',200);
     }
 
