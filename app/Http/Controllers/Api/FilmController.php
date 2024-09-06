@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\{
     StoreFilmRequest,
-    // UpdateFilmRequest,
+    UpdateFilmRequest,
 };
 use App\Interfaces\FilmRepositoryInterface;
 use App\Classes\ApiResponseClass;
@@ -42,7 +42,7 @@ class FilmController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreFilmRequest $request)
     {
         //
         $posterPath = $request->file('poster')->store('images');
@@ -73,8 +73,6 @@ class FilmController extends Controller
         //
         $Film = $this->filmRepositoryInterface->getById($id);
 
-        $Film['kritiks'] = $Film->kritik()->get();
-        $Film['perans'] = $Film->peran()->get();
         return ApiResponseClass::sendResponse(new FilmResource($Film), '', 200);
     }
 
